@@ -4,13 +4,27 @@
 :root {
   --gameboard__container_size: min(60vw, 75vh);
   --gameboard__square_fontsize: calc(var(--gameboard__container_size) * 0.25);
-  --gameboard__square_fontsize_invalid: calc(var(--gameboard__square_fontsize) * 1.10);
+  --gameboard__square_fontsize_invalid: calc(
+    var(--gameboard__square_fontsize) * 1.1
+  );
   --gameboard__square_gap: calc(var(--gameboard__square_fontsize) * 0.03);
-  --title__main_game_fontsize: calc(var(--gameboard__container_size) * 0.1);
+  --title__main_game_fontsize: calc(var(--gameboard__container_size) * 0.15);
+  --winner__fontsize: calc(var(--title__main_game_fontsize) * 1.5);
+}
+
+@keyframes winner {
+  0%,
+  100% {
+    color: black;
+  }
+  50% {
+    color: gold;
+  }
 }
 
 @keyframes invalid-flash {
-  0%, 100% {
+  0%,
+  100% {
     background-color: darkred;
     font-size: var(--gameboard__square_fontsize);
   }
@@ -19,6 +33,47 @@
     font-size: var(--gameboard__square_fontsize_invalid);
   }
 }
+
+.button__container {
+  text-align: center;
+}
+
+.button__main_menu {
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  border: 2px black solid;
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.5rem;
+  margin: 0 1rem 1rem 1rem;
+  width: auto;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.button__main_menu:hover {
+  background-color: lightgray;
+}
+
+.button__winner {
+  color: black;
+  background-color: white;
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+  border: 2px gold solid;
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.5rem;
+  margin: 0 1rem 1rem 1rem;
+  width: auto;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.button__winner:hover {
+  background-color: lightgray;
+}
+
 
 .gameboard__container {
   width: var(--gameboard__container_size);
@@ -52,18 +107,50 @@
   animation: invalid-flash 0.2s 2;
 }
 
+.popout__container {
+  z-index: 999;
+  position: absolute;
+  top: 10vh;
+  left: 10vw;
+  height: 80vh;
+  width: 80vw;
+  border-radius: 1rem;
+  background-color: lightgray;
+  padding: 2rem;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
 .title__container_center {
   text-align: center;
 }
 
 .title__main_game {
-  color: white;
+  color: black;
   text-align: center;
-  background-color: blue;
-  border-radius: 0.5rem;
-  padding: 0.25rem 2rem;
-  margin: 2rem auto;
-  width: auto;
-  display: inline-block;
+  margin: 1rem auto;
+  font-style: italic;
   font-size: var(--title__main_game_fontsize);
+}
+
+.winner__bounce {
+  animation: winner 0.25s 6;
+}
+
+.winner__container {
+  border-radius: 0.5rem;
+  background-color: blue;
+  padding: 0 3rem;
+  
+  z-index: 999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.winner__font {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", Arial, sans-serif;
+  font-size: var(--winner__fontsize);
+  font-weight: 600;
+  color: yellow;
 }
