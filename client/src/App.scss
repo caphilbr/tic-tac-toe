@@ -1,0 +1,69 @@
+@import "./../node_modules/foundation-sites/scss/foundation.scss";
+@include foundation-everything;
+
+:root {
+  --gameboard__container_size: min(60vw, 75vh);
+  --gameboard__square_fontsize: calc(var(--gameboard__container_size) * 0.25);
+  --gameboard__square_fontsize_invalid: calc(var(--gameboard__square_fontsize) * 1.10);
+  --gameboard__square_gap: calc(var(--gameboard__square_fontsize) * 0.03);
+  --title__main_game_fontsize: calc(var(--gameboard__container_size) * 0.1);
+}
+
+@keyframes invalid-flash {
+  0%, 100% {
+    background-color: darkred;
+    font-size: var(--gameboard__square_fontsize);
+  }
+  50% {
+    background-color: red;
+    font-size: var(--gameboard__square_fontsize_invalid);
+  }
+}
+
+.gameboard__container {
+  width: var(--gameboard__container_size);
+  height: var(--gameboard__container_size);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: var(--gameboard__square_gap);
+}
+
+.gameboard__square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px black solid;
+  font-size: var(--gameboard__square_fontsize);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gameboard__square_background_valid:hover {
+  background-color: lightgreen;
+}
+
+.gameboard__square_background_invalid:hover {
+  background-color: red;
+}
+
+.gameboard__square_invalid_click {
+  animation: invalid-flash 0.2s 2;
+}
+
+.title__container_center {
+  text-align: center;
+}
+
+.title__main_game {
+  color: white;
+  text-align: center;
+  background-color: blue;
+  border-radius: 0.5rem;
+  padding: 0.25rem 2rem;
+  margin: 2rem auto;
+  width: auto;
+  display: inline-block;
+  font-size: var(--title__main_game_fontsize);
+}
