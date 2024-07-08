@@ -18,3 +18,9 @@ export const startGame = (gameInstance) => {
     gameInstance: gameInstance
   }
 }
+
+export const endGame = () => {
+  return {
+    type: "END_GAME"
+  }
+}

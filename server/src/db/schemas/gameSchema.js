@@ -1,12 +1,11 @@
 import mongoose from "mongoose"
-import createRound from "../../services/createRound.js"
+import Round from "./../../models/Round.js"
 
 const gameSchema = new mongoose.Schema(
   {
-    players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }],
-    winner: { type: String, default: "" },
+    players: [{ type: mongoose.Schema.Types.ObjectId, ref: "Player" }],
     isActive: { type: Boolean, default: true },
-    rounds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Round' }],
+    rounds: [{ type: mongoose.Schema.Types.ObjectId, ref: "Round" }],
   },
   {
     methods: {
@@ -14,11 +13,15 @@ const gameSchema = new mongoose.Schema(
         this.players.push(newPlayer)
       },
       async addRound() {
-        const newRound = await createRound()
+        const newRound = await Round.createRound()
         this.rounds.push(newRound)
       },
     },
   }
 )
+
+gameSchema.statics.createGame = function() {
+  return new this()
+}
 
 export default gameSchema
