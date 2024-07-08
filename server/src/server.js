@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import mongoConfig from "./db/mongoConfig.js"
 import rootRouter from "./routes/rootRouter.js"
+import seeder from "./db/seeder/seeder.js"
 
 const app = express()
 const PORT = 5001
@@ -14,6 +15,7 @@ const startServer = async () => {
     console.log(`Server is running on http://localhost:${PORT}`)
   })
   app.use(rootRouter)
+  seeder()
 }
 
 try {

@@ -56,12 +56,12 @@
   background-color: lightgray;
 }
 
-.button__playerForm {
+.button__form {
   @extend .button__main_menu;
   background-color: white;
 }
 
-.button__playerForm:hover {
+.button__form:hover {
   background-color: rgb(233, 233, 233);
 }
 
@@ -108,12 +108,21 @@
   animation: invalid-flash 0.2s 2;
 }
 
+.newplayer__input {
+  display: inline-block;
+  width: 50vw;
+}
+
+.newplayer__label {
+  display: inline;
+  margin-right: 1rem;
+}
+
 .popout__container {
   z-index: 999;
   position: absolute;
   top: 10vh;
   left: 10vw;
-  height: 65vh;
   width: 80vw;
   border-radius: 1rem;
   background-color: lightgray;
@@ -122,20 +131,38 @@
   text-align: center;
 }
 
-.popout__container_input {
-  display: inline-block;
-  width: 50vw;
-}
-
-.popout__container_label {
-  display: inline;
-  margin-right: 1rem;
-}
-
 .popout__container_errorMessage {
   font-weight: bold;
   color: red;
   margin-bottom: 0.5rem;
+}
+
+.popout__container_newGame {
+  @extend .popout__container;
+  z-index: 998;
+  height: auto;
+  overflow-y: auto;
+}
+
+.popout__container_newPlayer {
+  @extend .popout__container;
+  z-index: 999;
+  top: 2.5vh;
+  left: 2.5vw;
+  height: 90%;
+  width: 75vw;
+}
+
+.selectplayer__form_container {
+  display: inline-block;
+  width: auto;
+  text-align: left;
+}
+
+.selectplayer__message {
+  font-weight: bold;
+  color: red;
+  text-align: center;
 }
 
 .title__container_center {
@@ -155,6 +182,14 @@
   text-align: center;
   margin: 1rem auto;
   font-size: 35px;
+}
+
+.title__selectplayers {
+  text-align: center;
+  margin: 0 auto 1rem;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .winner__bounce {

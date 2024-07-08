@@ -1,9 +1,12 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { addPlayer } from "./../redux/actions.js"
 import config from "./../config.js"
 import FormError from "./FormError.jsx"
 
 const NewPlayerForm = (props) => {
-  const [player, setPlayer] = useState({
+  const dispatch = useDispatch()
+  const [payload, setPayload] = useState({
     name: "",
   })
   const [errorMessage, setErrorMessage] = useState(null)
@@ -22,24 +25,21 @@ const NewPlayerForm = (props) => {
   }
 
   const closeForm = () => {
-    props.setGameStatus({
-      ...props.gameStatus,
-      showAddPlayer: false,
-    })
+    props.setShowPlayerForm(false)
   }
 
   const handleChange = (event) => {
-    setPlayer({ name: event.currentTarget.value })
+    setPayload({ name: event.currentTarget.value })
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    if (validateInput(player.name)) {
+    if (validateInput(payload.name)) {
       try {
         const url = config.apiHost + "/api/v1/player"
         const response = await fetch(url, {
           method: "POST",
-          body: JSON.stringify(player),
+          body: JSON.stringify(payload),
           headers: new Headers({
             "Content-Type": "application/json",
           }),
@@ -53,9 +53,8 @@ const NewPlayerForm = (props) => {
           throw error
         } else {
           const parsedResponse = await response.json()
-          console.log(parsedResponse)
+          dispatch(addPlayer(parsedResponse.player.name))
           closeForm()
-          // add new player to Redux list of players
         }
       } catch (error) {
         console.log(error.message)
@@ -64,17 +63,17 @@ const NewPlayerForm = (props) => {
   }
 
   return (
-    <div className="popout__container">
+    <div className="popout__container_newPlayer">
       <p className="title__form">New Player Form</p>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name" className="popout__container_label">
+        <label htmlFor="name" className="newplayer__label">
           Player Name:
         </label>
         <input
           type="text"
           id="name"
-          className="popout__container_input"
-          value={player.name}
+          className="newplayer__input"
+          value={payload.name}
           onChange={handleChange}
         />
         <FormError errorMessage={errorMessage} />
@@ -82,9 +81,9 @@ const NewPlayerForm = (props) => {
           <input
             type="submit"
             value="Add Player"
-            className="button__playerForm"
+            className="button__form"
           />
-          <span className="button__playerForm" onClick={closeForm}>
+          <span className="button__form" onClick={closeForm}>
             Cancel
           </span>
         </div>
