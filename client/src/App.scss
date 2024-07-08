@@ -42,6 +42,7 @@
   color: black;
   font-weight: bold;
   text-align: center;
+  line-height: 1.5;
   border: 2px black solid;
   border-radius: 0.25rem;
   padding: 0.1rem 0.5rem;
@@ -55,25 +56,25 @@
   background-color: lightgray;
 }
 
-.button__winner {
-  color: black;
+.button__playerForm {
+  @extend .button__main_menu;
   background-color: white;
-  font-weight: bold;
-  text-align: center;
+}
+
+.button__playerForm:hover {
+  background-color: rgb(233, 233, 233);
+}
+
+.button__winner {
+  @extend .button__main_menu;
+  background-color: white;
   font-size: 16px;
   border: 2px gold solid;
-  border-radius: 0.25rem;
-  padding: 0.1rem 0.5rem;
-  margin: 0 1rem 1rem 1rem;
-  width: auto;
-  display: inline-block;
-  cursor: pointer;
 }
 
 .button__winner:hover {
   background-color: lightgray;
 }
-
 
 .gameboard__container {
   width: var(--gameboard__container_size);
@@ -112,12 +113,29 @@
   position: absolute;
   top: 10vh;
   left: 10vw;
-  height: 80vh;
+  height: 65vh;
   width: 80vw;
   border-radius: 1rem;
   background-color: lightgray;
   padding: 2rem;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.popout__container_input {
+  display: inline-block;
+  width: 50vw;
+}
+
+.popout__container_label {
+  display: inline;
+  margin-right: 1rem;
+}
+
+.popout__container_errorMessage {
+  font-weight: bold;
+  color: red;
+  margin-bottom: 0.5rem;
 }
 
 .title__container_center {
@@ -127,9 +145,16 @@
 .title__main_game {
   color: black;
   text-align: center;
-  margin: 1rem auto;
+  margin: 0 auto;
   font-style: italic;
   font-size: var(--title__main_game_fontsize);
+}
+
+.title__form {
+  color: black;
+  text-align: center;
+  margin: 1rem auto;
+  font-size: 35px;
 }
 
 .winner__bounce {

@@ -2,7 +2,6 @@ import { useState } from "react"
 
 const Square = (props) => {
   const [invalidClick, setInvalidClick] = useState(null)
-  console.log(invalidClick)
   let background = "gameboard__square_background_valid"
   if (props.value) {
     background = "gameboard__square_background_invalid"
