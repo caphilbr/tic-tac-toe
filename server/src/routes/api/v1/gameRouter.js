@@ -1,12 +1,12 @@
 import express from "express"
-import createGame from "../../../services/createGame.js"
+import Game from "../../../models/Game.js"
 import initializeGame from "../../../services/initializeGame.js"
 
 const gameRouter = new express.Router()
 
 gameRouter.post("/", async (req, res) => {
   try {
-    const emptyGame = await createGame()
+    const emptyGame = await Game.createGame()
     const game = await initializeGame(emptyGame, req.body.players)
     res.status(201).json({ game })
   } catch (error) {

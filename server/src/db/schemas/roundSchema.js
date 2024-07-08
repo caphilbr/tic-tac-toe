@@ -7,4 +7,8 @@ const roundSchema = new mongoose.Schema({
   isActive: { type: Boolean, default: true }
 })
 
+roundSchema.statics.createRound = function() {
+  return new this()
+}
+
 export default roundSchema
