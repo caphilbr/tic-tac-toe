@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 
 const Square = (props) => {
   const game = useSelector((state) => state.game)
+  const currentRound = game.rounds[game.rounds.length - 1]
   const [invalidClick, setInvalidClick] = useState(null)
   
   let background = "gameboard__square_background_valid"
@@ -11,7 +12,7 @@ const Square = (props) => {
   }
 
   const handleClick = () => {
-    if (game.isActive) {
+    if (game.isActive && currentRound.isActive) {
       if (props.value) {
         setInvalidClick("gameboard__square_invalid_click")
         setTimeout(() => setInvalidClick(null), 500)
