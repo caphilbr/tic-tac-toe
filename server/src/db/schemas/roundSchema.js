@@ -12,7 +12,6 @@ const roundSchema = new mongoose.Schema(
   },
   {
     methods: {
-      
       async addMove(move) {
         this.moves.push(move)
         if (this.nextMove == "O") {
@@ -22,7 +21,7 @@ const roundSchema = new mongoose.Schema(
         }
         await this.save()
       },
-      
+
       playerMoves(letter) {
         const movesArray = []
         this.moves.forEach((move) => {
@@ -30,7 +29,7 @@ const roundSchema = new mongoose.Schema(
         })
         return movesArray
       },
-      
+
       async roundStatus() {
         const playerXMoves = this.playerMoves("X")
         const playerOMoves = this.playerMoves("O")
@@ -51,12 +50,12 @@ const roundSchema = new mongoose.Schema(
             await this.save()
             return "win"
           }
-          if (this.moves.length == 9) {
-            this.winner = "draw"
-            this.isActive = false
-            await this.save()
-            return "draw"
-          }
+        }
+        if (this.isActive && this.moves.length == 9) {
+          this.winner = "draw"
+          this.isActive = false
+          await this.save()
+          return "draw"
         }
         if (this.isActive) return null
       },

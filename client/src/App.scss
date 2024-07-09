@@ -2,7 +2,7 @@
 @include foundation-everything;
 
 :root {
-  --gameboard__container_size: min(60vw, 75vh);
+  --gameboard__container_size: min(50vw, 60vh);
   --gameboard__square_fontsize: calc(var(--gameboard__container_size) * 0.25);
   --gameboard__square_fontsize_invalid: calc(
     var(--gameboard__square_fontsize) * 1.1
@@ -10,7 +10,7 @@
   --gameboard__square_gap: calc(var(--gameboard__square_fontsize) * 0.03);
   --title__main_game_fontsize: calc(var(--gameboard__container_size) * 0.20);
   --winner__fontsize: calc(var(--title__main_game_fontsize) * 1.5);
-  --winner__fraw_fontsize: calc(var(--title__main_game_fontsize) * 0.85);
+  --winner__draw_fontsize: calc(var(--title__main_game_fontsize) * 0.60);
 }
 
 @keyframes winner {
@@ -255,7 +255,7 @@
 
 .winner__draw_font {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", Arial, sans-serif;
-  font-size: var(--winner__fraw_fontsize);
+  font-size: var(--winner__draw_fontsize);
   font-weight: 400;
   color: yellow;
 }
