@@ -43,7 +43,7 @@ const SelectPlayers = (props) => {
         const url = config.apiHost + "/api/v1/game"
         const response = await fetch(url, {
           method: "POST",
-          body: JSON.stringify({ players: playerList }),
+          body: JSON.stringify({ players: selectedPlayers }),
           headers: new Headers({
             "Content-Type": "application/json",
           }),

@@ -25,6 +25,8 @@ export const game = (
   switch (action.type) {
     case "START_GAME":
       return action.gameInstance
+    case "REPLACE_GAME":
+      return action.game
     case "END_GAME":
     return {
         ...state,

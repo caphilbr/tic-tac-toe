@@ -5,6 +5,7 @@ import MenuButtons from "./MenuButtons"
 import NewGameForm from "./NewGameForm"
 import WinnerDisplay from "./WinnerDisplay"
 import DrawDisplay from "./DrawDisplay"
+import WinLoss from "./WinLoss"
 
 function App() {
   const [showNewGame, setShowNewGame] = useState(false)
@@ -21,6 +22,7 @@ function App() {
         <h1 className="title__main_game">Tic Tac Toe</h1>
       </div>
       <MenuButtons setShowNewGame={setShowNewGame} />
+      <WinLoss />
       <GameBoard setRoundStatus={setRoundStatus}/>
     </>
   )
