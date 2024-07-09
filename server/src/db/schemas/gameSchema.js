@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import Round from "./../../models/Round.js"
+import Player from "./../../models/Player.js"
 
 const gameSchema = new mongoose.Schema(
   {
@@ -15,18 +16,36 @@ const gameSchema = new mongoose.Schema(
       addPlayer(letter, newPlayer) {
         this.players[letter] = newPlayer
       },
-      async addRound() {
-        const newRound = await Round.createRound()
+      async addInitialRound() {
+        const newRound = await Round.createRound(this._id)
         this.rounds.push(newRound)
       },
+      async addNextRound(firstMove) {
+        const newRound = await Round.createRound(this._id)
+        newRound.firstMove = firstMove
+        newRound.nextMove = firstMove
+        await newRound.save()
+        this.rounds.push(newRound)
+        this.save()
+        return newRound
+      },
+      async endGame() {
+        this.isActive = false
+        this.save()
+      }
     },
   }
 )
 
-gameSchema.statics.createGame = async function() {
+gameSchema.statics.createGame = async function(playerNameArray) {
   const newGame = new this()
-  const savedGame = await newGame.save()
-  return savedGame
+  const playerX = await Player.findOne({ name: playerNameArray[0].name })
+  const playerO = await Player.findOne({ name: playerNameArray[1].name })
+  newGame.addPlayer("X", playerX)
+  newGame.addPlayer("O", playerO)
+  await newGame.addInitialRound()
+  await newGame.save()
+  return newGame
 }
 
 export default gameSchema

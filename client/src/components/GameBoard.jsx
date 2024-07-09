@@ -3,7 +3,7 @@ import { updateRound } from "./../redux/actions.js"
 import Square from "./Square"
 import config from "../config"
 
-const GameBoard = () => {
+const GameBoard = (props) => {
   const game = useSelector((state) => state.game)
   const dispatch = useDispatch()
   let currentRound = null
@@ -24,13 +24,14 @@ const GameBoard = () => {
       const url = config.apiHost + `/api/v1/game/move/${roundId}/${move}`
       const response = await fetch(url, { method: "POST" })
       const parsedResponse = await response.json()
+      props.setRoundStatus(parsedResponse.status)
       dispatch(updateRound(parsedResponse.round))
     } catch (error) {
       console.log(error)
     }
   }
 
-  const turnNotice = game.isActive ? (
+  const turnNotice = game.isActive && currentRound.isActive ? (
     <div className="title__container_center">
       <div className="gameboard__nextMove_message">
         {`${nextPlayer}, please place your "${nextMove}"`}
