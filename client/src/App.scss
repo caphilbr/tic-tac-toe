@@ -10,6 +10,7 @@
   --gameboard__square_gap: calc(var(--gameboard__square_fontsize) * 0.03);
   --title__main_game_fontsize: calc(var(--gameboard__container_size) * 0.15);
   --winner__fontsize: calc(var(--title__main_game_fontsize) * 1.5);
+  --winner__fraw_fontsize: calc(var(--title__main_game_fontsize) * 0.85);
 }
 
 @keyframes winner {
@@ -211,7 +212,7 @@
 .winner__container {
   border-radius: 0.5rem;
   background-color: blue;
-  padding: 0 3rem;
+  padding: 0 2rem;
   
   z-index: 999;
   position: absolute;
@@ -224,5 +225,12 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", Arial, sans-serif;
   font-size: var(--winner__fontsize);
   font-weight: 600;
+  color: yellow;
+}
+
+.winner__draw_font {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", Arial, sans-serif;
+  font-size: var(--winner__fraw_fontsize);
+  font-weight: 400;
   color: yellow;
 }

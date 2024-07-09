@@ -31,3 +31,10 @@ export const updateRound = (round) => {
     round: round
   }
 }
+
+export const newRound = (newRound) => {
+  return {
+    type: "NEW_ROUND",
+    newRound: newRound
+  }
+}

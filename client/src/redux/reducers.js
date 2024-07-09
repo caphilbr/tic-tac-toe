@@ -26,15 +26,9 @@ export const game = (
     case "START_GAME":
       return action.gameInstance
     case "END_GAME":
-      const updatedRounds = state.rounds.slice(0, -1)
-      updatedRounds.push({
-        ...state.rounds[state.rounds.length - 1],
-        isActive: false,
-      })
-      return {
+    return {
         ...state,
-        isActive: false,
-        rounds: updatedRounds,
+        isActive: false
       }
     case "UPDATE_ROUND":
       const latestRounds = state.rounds.slice(0, -1)
@@ -42,6 +36,14 @@ export const game = (
       return {
         ...state,
         rounds: latestRounds,
+      }
+    case "NEW_ROUND":
+    return {
+        ...state,
+        rounds: [
+          ...state.rounds,
+          action.newRound
+        ]
       }
     default:
       return state
