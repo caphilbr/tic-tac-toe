@@ -24,3 +24,10 @@ export const endGame = () => {
     type: "END_GAME"
   }
 }
+
+export const updateRound = (round) => {
+  return {
+    type: "UPDATE_ROUND",
+    round: round
+  }
+}

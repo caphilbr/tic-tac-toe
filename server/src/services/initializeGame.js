@@ -1,10 +1,10 @@
 import Player from "./../models/Player.js"
 
 const initializeGame = async (game, playerNameArray) => {
-  for (const player of playerNameArray) {
-    const playerObject = await Player.findOne({ name: player.name })
-    game.addPlayer(playerObject)
-  }
+  const playerX = await Player.findOne({ name: playerNameArray[0].name })
+  const playerO = await Player.findOne({ name: playerNameArray[1].name })
+  game.addPlayer("X", playerX)
+  game.addPlayer("O", playerO)
   await game.addRound()
   return game
 }

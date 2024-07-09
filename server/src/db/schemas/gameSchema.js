@@ -3,14 +3,17 @@ import Round from "./../../models/Round.js"
 
 const gameSchema = new mongoose.Schema(
   {
-    players: [{ type: mongoose.Schema.Types.ObjectId, ref: "Player" }],
+    players: {
+      X: { type: mongoose.Schema.Types.ObjectId, ref: "Player" },
+      O: { type: mongoose.Schema.Types.ObjectId, ref: "Player" },
+    },
     isActive: { type: Boolean, default: true },
     rounds: [{ type: mongoose.Schema.Types.ObjectId, ref: "Round" }],
   },
   {
     methods: {
-      addPlayer(newPlayer) {
-        this.players.push(newPlayer)
+      addPlayer(letter, newPlayer) {
+        this.players[letter] = newPlayer
       },
       async addRound() {
         const newRound = await Round.createRound()
@@ -20,8 +23,10 @@ const gameSchema = new mongoose.Schema(
   }
 )
 
-gameSchema.statics.createGame = function() {
-  return new this()
+gameSchema.statics.createGame = async function() {
+  const newGame = new this()
+  const savedGame = await newGame.save()
+  return savedGame
 }
 
 export default gameSchema
