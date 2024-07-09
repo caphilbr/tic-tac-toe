@@ -1,6 +1,14 @@
+import { useSelector, useDispatch } from "react-redux"
+import { replaceGame } from "../redux/actions"
+import updateWinLoss from "../services/updateWinLoss"
+
 const DrawDisplay = (props) => {
-  
-  const handleContinue = () => {
+  const game = useSelector(state => state.game)
+  const dispatch = useDispatch()
+
+  const handleContinue = async () => {
+    const updatedGame = await updateWinLoss(game._id)
+    dispatch(replaceGame(updatedGame))
     props.setRoundStatus(null)
   }
   

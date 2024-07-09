@@ -38,3 +38,10 @@ export const newRound = (newRound) => {
     newRound: newRound
   }
 }
+
+export const replaceGame = (game) => {
+  return {
+    type: "REPLACE_GAME",
+    game: game
+  }
+}

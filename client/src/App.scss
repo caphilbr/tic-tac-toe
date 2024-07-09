@@ -8,7 +8,7 @@
     var(--gameboard__square_fontsize) * 1.1
   );
   --gameboard__square_gap: calc(var(--gameboard__square_fontsize) * 0.03);
-  --title__main_game_fontsize: calc(var(--gameboard__container_size) * 0.15);
+  --title__main_game_fontsize: calc(var(--gameboard__container_size) * 0.20);
   --winner__fontsize: calc(var(--title__main_game_fontsize) * 1.5);
   --winner__fraw_fontsize: calc(var(--title__main_game_fontsize) * 0.85);
 }
@@ -203,6 +203,31 @@
   font-size: 20px;
   font-weight: bold;
   text-decoration: underline;
+}
+
+.title__winloss {
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 18px;
+}
+
+.winloss__container {
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+.winloss__display_box {
+  display: inline-block;
+  width: auto;
+  text-align: left;
+  background-color: lightgray;
+  border-radius: 0.25rem;
+  padding: 0.25rem 1rem;
+}
+
+.winloss__display_box p {
+  margin: 0;
+  padding: 0;
 }
 
 .winner__bounce {

@@ -29,7 +29,6 @@ gameRouter.post("/new-round/:gameId", async (req, res) => {
   }
 })
 
-
 gameRouter.post("/move/:roundId/:move", async (req, res) => {
   try {
     const { roundId, move } = req.params
@@ -47,6 +46,19 @@ gameRouter.post("/", async (req, res) => {
   try {
     const game = await Game.createGame(req.body.players)
     res.status(201).json({ game })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+gameRouter.get("/win-loss/:gameId", async (req, res) => {
+  try {
+    const game = await Game.findById(req.params.gameId)
+    await game.updateWinLoss()
+    await game.populate("players.X")
+    await game.populate("players.O")
+    res.status(200).json({ game })
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: error.message })
