@@ -16,7 +16,7 @@ export const playerList = (state = [], action) => {
 
 export const game = (
   state = {
-    players: [],
+    players: {},
     isActive: false,
     rounds: [],
   },
@@ -28,31 +28,21 @@ export const game = (
     case "END_GAME":
       const updatedRounds = state.rounds.slice(0, -1)
       updatedRounds.push({
-        ...state.rounds[state.rounds.length-1],
-        isActive: false
+        ...state.rounds[state.rounds.length - 1],
+        isActive: false,
       })
       return {
         ...state,
         isActive: false,
-        rounds: updatedRounds
+        rounds: updatedRounds,
       }
-    default:
-      return state
-  }
-}
-
-export const round = (
-  state = {
-    game: null,
-    moves: [],
-    winner: null,
-    isActive: false,
-  },
-  action
-) => {
-  switch (action.type) {
-    case "???":
-      return action.gameInstance
+    case "UPDATE_ROUND":
+      const latestRounds = state.rounds.slice(0, -1)
+      latestRounds.push(action.round)
+      return {
+        ...state,
+        rounds: latestRounds,
+      }
     default:
       return state
   }
